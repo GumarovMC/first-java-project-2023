@@ -28,26 +28,49 @@ public class Matematik {
     }
 
     public double calculateSquareSurface(double side) throws Exception {
-        if (educationLevel >= 2) {
-            System.out.println("Я начал работать.");
+        if (educationLevel >= 10) {
+            System.err.println("Я отказываюсь вычислять что-либо.");
+            throw new Exception("Математик отказывается вычислять что-либо.");
+        } else if (educationLevel >= 5) {
+            // Площадь шара
+            // Формула: 4 * pi * радиус^2
             if (side <= 0) {
-                // нужно выбрасывать ошибку
-                System.out.println("Сторона квадрата не может быть отрицательной");
-                return -1;
+                throw new IllegalArgumentException("Радиус шара не может быть отрицательным");
             }
             Thread.sleep(100_000 / speed);
-            return side * side;
-        } else if (educationLevel == 1) {
-            System.out.println("Я только начинаю, могу ошибтся в этом непростом для меня вычислении.");
-            if (Math.random() > 0.5) {
-                Thread.sleep(200_000 / speed);
-                return side * side;
+            return 4 * Math.PI * side * side;
+        } else if (educationLevel >= 4) {
+            // Площадь поверхности призмы
+            // Формула для прямоугольной призмы: 2 * (ширина * длина + высота * длина + высота * ширина)
+            if (side <= 0) {
+                throw new IllegalArgumentException("Сторона призмы не может быть отрицательной");
+            }
+            Thread.sleep(100_000 / speed);
+            return 2 * (side * side + side * side + side * side);
+        } else if (educationLevel >= 3) {
+            // Площадь круга
+            // Формула: pi * радиус^2
+            if (side <= 0) {
+                throw new IllegalArgumentException("Радиус круга не может быть отрицательным");
+            }
+            Thread.sleep(100_000 / speed);
+            return Math.PI * side * side;
+        } else if (educationLevel == 2) {
+            if (Math.random() > 0.6) { // 40% вероятность ошибки
+                throw new Exception("Ошибка при вычислении площади квадрата");
             } else {
                 Thread.sleep(200_000 / speed);
-                return side * side / 2;
+                return side * side;
+            }
+        } else if (educationLevel == 1) {
+            if (Math.random() > 0.4) { // 60% вероятность ошибки
+                throw new Exception("Ошибка при вычислении площади квадрата");
+            } else {
+                Thread.sleep(200_000 / speed);
+                return side * side;
             }
         } else {
-            System.out.println("Ничего не могу сделать.");
+            System.err.println("Ничего не могу сделать.");
             return -999_999_999;
         }
     }
